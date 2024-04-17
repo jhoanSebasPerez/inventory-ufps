@@ -1,0 +1,21 @@
+datasource db {
+  provider = "postgresql"
+  url = env("DIRECT_URL_DEV")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  engineType = "library"
+} 
+
+model Equipment{
+  id Int @id @default(autoincrement())
+  description String @unique
+  brand String
+  model String
+  category String
+  office String
+  state String
+  quantity Int
+  createdAt DateTime @default(now())
+}
