@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import {
   Bell,
@@ -6,7 +8,6 @@ import {
   Menu,
   Package,
   Package2,
-  Search,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -18,31 +19,34 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Toaster } from "@/components/ui/sonner";
+import { SearchBar } from "@/components/compound/search-bar";
+
+interface Item {
+  id: number;
+  name: string;
+  icon: () => React.ReactNode;
+  url: string;
+}
+
+const items: Item[] = [
+  {
+    id: 1,
+    name: "Dashboard",
+    icon: () => <Home className="h-4 w-4" />,
+    url: "/admin/dashboard",
+  },
+  {
+    id: 2,
+    name: "Articulos",
+    icon: () => <Package className="h-4 w-4" />,
+    url: "/admin/equipments",
+  },
+];
 
 export default function Layout({ children }: { children: React.ReactNode }) {
-  interface Item {
-    id: number;
-    name: string;
-    icon: () => React.ReactNode;
-    url: string;
-  }
-
-  const items: Item[] = [
-    {
-      id: 1,
-      name: "Dashboard",
-      icon: () => <Home className="h-4 w-4" />,
-      url: "/admin/dashboard",
-    },
-    {
-      id: 2,
-      name: "Articulos",
-      icon: () => <Package className="h-4 w-4" />,
-      url: "/admin/equipments",
-    },
-  ];
 
   return (
     <div className="grid min-h-screen w-full md:grid-cols-[220px_1fr] lg:grid-cols-[280px_1fr]">
@@ -89,6 +93,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 <span className="sr-only">Toggle navigation menu</span>
               </Button>
             </SheetTrigger>
+            <SearchBar />
             <SheetContent side="left" className="flex flex-col">
               <nav className="grid gap-2 text-lg font-medium">
                 <Link
@@ -113,18 +118,6 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="w-full flex-1">
-            <form>
-              <div className="relative">
-                <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-                <Input
-                  type="search"
-                  placeholder="Search products..."
-                  className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
-                />
-              </div>
-            </form>
-          </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
@@ -145,6 +138,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}
         </main>
+        <Toaster />
       </div>
     </div>
   );

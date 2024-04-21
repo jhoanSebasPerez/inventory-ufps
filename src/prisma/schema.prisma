@@ -6,16 +6,73 @@ datasource db {
 generator client {
   provider = "prisma-client-js"
   engineType = "library"
+  previewFeatures = ["fullTextSearch"]
 } 
+
+enum Role {
+  ADMIN
+  OWNER
+  MANAGER
+}
+
+enum State {
+  BUENO
+  MALO
+  REGULAR
+}
 
 model Equipment{
   id Int @id @default(autoincrement())
-  description String @unique
+  name String
+  description String?
   brand String
   model String
-  category String
-  office String
-  state String
+  category Category @relation(fields: [categoryId], references: [id])
+  categoryId Int
+  units Unit[]
   quantity Int
   createdAt DateTime @default(now())
 }
+
+model Unit{
+  id Int @id @default(autoincrement())
+  serialNumber String @unique
+  equipmentId Int @unique
+  equipment Equipment @relation(fields: [equipmentId], references: [id])
+  state State @default(BUENO)
+  office Office @relation(fields: [officeId], references: [id])
+  officeId Int
+  entryDate DateTime @default(now())
+  departureDate DateTime?
+  owner User @relation(fields: [ownerId], references: [id])
+  ownerId String
+  createdAt DateTime @default(now())
+}
+
+model Category{
+  id Int @id @default(autoincrement())
+  name String
+  description String?
+  equipments Equipment[] 
+  createdAt DateTime @default(now())
+}
+
+model Office{
+  id Int @id @default(autoincrement())
+  location String @unique
+  description String?
+  units Unit[]
+  createdAt DateTime @default(now())
+}
+
+model User{
+  id String @id @default(cuid())
+  name String
+  email String @unique
+  password String
+  role String @default("OWNER")
+  units Unit[]
+  createdAt DateTime @default(now())
+}
+
+

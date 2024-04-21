@@ -1,3 +1,4 @@
+"use client";
 
 
 import { EquipmentList } from "@/components/compound/equipment-list";

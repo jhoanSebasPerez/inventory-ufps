@@ -1,0 +1,262 @@
+<svg version="1.1" baseProfile="full" width="1846.0" height="524.0" viewbox="0 0 1846 524" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+<desc >#.interface: fill=lightblue
+#.enumeration: fill=lightgreen
+#.type: fill=lightgray
+[Categoria|+id: number;+name: string;+description: string;+euipos: Equipo\[\]|\#addEquipo(): void;+removeEquipo(): void;\#getEquipos(): Equipo\[\];\#getEquipo(): Equipo \| undefined;\#getId(): number;\#getName(): string;\#getDescription(): string;\#setId(): void;\#setName(): void;\#setDescription(): void;\#setEquipos(): void;\#toString(): string]
+[Equipo|+id: number;+name: string;+description: string;+brand: string;+model: string;+category: Categoria;+quantity: number;+unidades: Unidad\[\]|\#getId(): number;\#getName(): string;\#addUnidad(): void;\#removeUnidad(): void;\#getUnidades(): Unidad\[\];\#getUnidad(): Unidad \| undefined;\#getDescription(): string;\#getBrand(): string;\#getModel(): string;\#getCategory(): Categoria;\#getQuantity(): number;\#setId(): void;\#setName(): void;\#setDescription(): void;\#setBrand(): void;\#setModel(): void;\#setCategory(): void;\#setQuantity(): void;\#toString(): string]
+[Usuario|+codigo: string;+name: string;+email: string;+password: string;+role: Roles|\#getCodigo(): string;\#getName(): string;\#getEmail(): string;\#getPassword(): string;\#getRole(): Roles;\#setCodigo(): void;\#setName(): void;\#setEmail(): void;\#setPassword(): void;\#setRole(): void;\#toString(): string]
+[Oficina|+id: number;+location: string;+description: string|\#getLocation(): string;\#getDescription(): string;\#setLocation(): void;\#setDescription(): void;\#toString(): string]
+[Unidad|+serialNumber: string;+equipment: Equipo;+state: States;+office: Oficina;+owner: Usuario|\#getSerialNumber(): string;\#getEquipment(): Equipo;\#getState(): States;\#getOffice(): Oficina;\#getOwner(): Usuario;\#setSerialNumber(): void;\#setEquipment(): void;\#setState(): void;\#setOffice(): void;\#setOwner(): void;\#toString(): string]
+[&lt;enumeration&gt;Roles|ADMIN;OWNER;JEFE_MANTENIMIENTO;ENCARGADO_MANTENIMIENTO]
+[&lt;enumeration&gt;States|BUENO;MALO;REGULAR]</desc>
+<g stroke-width="1.0" text-align="left" font="12pt Helvetica, Arial, sans-serif" font-size="12pt" font-family="Helvetica" font-weight="normal" font-style="normal">
+<g font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" stroke-width="3.0" stroke-linejoin="round" stroke-linecap="round" stroke="#33322E">
+<g stroke="transparent" fill="transparent">
+<rect x="0.0" y="0.0" height="524.0" width="1846.0" stroke="none"></rect>
+</g>
+<g transform="translate(8, 8)" fill="#33322E">
+<g transform="translate(20, 20)">
+<g data-name="Categoria">
+<g fill="#eee8d5" stroke="#33322E" data-name="Categoria">
+<rect x="0.0" y="82.5" height="303.0" width="277.0" data-name="Categoria"></rect>
+<path d="M0.0 113.5 L277.0 113.5" fill="none" data-name="Categoria"></path>
+<path d="M0.0 189.5 L277.0 189.5" fill="none" data-name="Categoria"></path>
+</g>
+<g transform="translate(0, 82.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Categoria">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Categoria">
+<a id="src/types/model.ts.Categoria" xlink:href="src/types/model.ts"><text x="130.5" y="13.5" stroke="none" text-anchor="middle" data-name="Categoria">Categoria</text></a>
+
+</g>
+</g>
+<g transform="translate(0, 113.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Categoria">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Categoria">
+<text x="0.0" y="13.5" stroke="none" data-name="Categoria">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Categoria">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Categoria">+description: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Categoria">+euipos: Equipo[]</text>
+
+</g>
+</g>
+<g transform="translate(0, 189.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Categoria">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Categoria">
+<text x="0.0" y="13.5" stroke="none" data-name="Categoria">#addEquipo(): void</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Categoria">+removeEquipo(): void</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Categoria">#getEquipos(): Equipo[]</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Categoria">#getEquipo(): Equipo | undefined</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Categoria">#getId(): number</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Categoria">#getName(): string</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Categoria">#getDescription(): string</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Categoria">#setId(): void</text>
+<text x="0.0" y="133.5" stroke="none" data-name="Categoria">#setName(): void</text>
+<text x="0.0" y="148.5" stroke="none" data-name="Categoria">#setDescription(): void</text>
+<text x="0.0" y="163.5" stroke="none" data-name="Categoria">#setEquipos(): void</text>
+<text x="0.0" y="178.5" stroke="none" data-name="Categoria">#toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Equipo">
+<g fill="#eee8d5" stroke="#33322E" data-name="Equipo">
+<rect x="317.0" y="0.0" height="468.0" width="279.0" data-name="Equipo"></rect>
+<path d="M317.0 31.0 L596.0 31.0" fill="none" data-name="Equipo"></path>
+<path d="M317.0 167.0 L596.0 167.0" fill="none" data-name="Equipo"></path>
+</g>
+<g transform="translate(317, 0)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Equipo">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Equipo">
+<a id="src/types/model.ts.Equipo" xlink:href="src/types/model.ts"><text x="131.5" y="13.5" stroke="none" text-anchor="middle" data-name="Equipo">Equipo</text></a>
+
+</g>
+</g>
+<g transform="translate(317, 31)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Equipo">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Equipo">
+<text x="0.0" y="13.5" stroke="none" data-name="Equipo">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Equipo">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Equipo">+description: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Equipo">+brand: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Equipo">+model: string</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Equipo">+category: Categoria</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Equipo">+quantity: number</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Equipo">+unidades: Unidad[]</text>
+
+</g>
+</g>
+<g transform="translate(317, 167)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Equipo">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Equipo">
+<text x="0.0" y="13.5" stroke="none" data-name="Equipo">#getId(): number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Equipo">#getName(): string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Equipo">#addUnidad(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Equipo">#removeUnidad(): void</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Equipo">#getUnidades(): Unidad[]</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Equipo">#getUnidad(): Unidad | undefined</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Equipo">#getDescription(): string</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Equipo">#getBrand(): string</text>
+<text x="0.0" y="133.5" stroke="none" data-name="Equipo">#getModel(): string</text>
+<text x="0.0" y="148.5" stroke="none" data-name="Equipo">#getCategory(): Categoria</text>
+<text x="0.0" y="163.5" stroke="none" data-name="Equipo">#getQuantity(): number</text>
+<text x="0.0" y="178.5" stroke="none" data-name="Equipo">#setId(): void</text>
+<text x="0.0" y="193.5" stroke="none" data-name="Equipo">#setName(): void</text>
+<text x="0.0" y="208.5" stroke="none" data-name="Equipo">#setDescription(): void</text>
+<text x="0.0" y="223.5" stroke="none" data-name="Equipo">#setBrand(): void</text>
+<text x="0.0" y="238.5" stroke="none" data-name="Equipo">#setModel(): void</text>
+<text x="0.0" y="253.5" stroke="none" data-name="Equipo">#setCategory(): void</text>
+<text x="0.0" y="268.5" stroke="none" data-name="Equipo">#setQuantity(): void</text>
+<text x="0.0" y="283.5" stroke="none" data-name="Equipo">#toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Usuario">
+<g fill="#eee8d5" stroke="#33322E" data-name="Usuario">
+<rect x="636.0" y="82.5" height="303.0" width="194.0" data-name="Usuario"></rect>
+<path d="M636.0 113.5 L830.0 113.5" fill="none" data-name="Usuario"></path>
+<path d="M636.0 204.5 L830.0 204.5" fill="none" data-name="Usuario"></path>
+</g>
+<g transform="translate(636, 82.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Usuario">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Usuario">
+<a id="src/types/model.ts.Usuario" xlink:href="src/types/model.ts"><text x="89.0" y="13.5" stroke="none" text-anchor="middle" data-name="Usuario">Usuario</text></a>
+
+</g>
+</g>
+<g transform="translate(636, 113.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Usuario">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Usuario">
+<text x="0.0" y="13.5" stroke="none" data-name="Usuario">+codigo: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Usuario">+name: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Usuario">+email: string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Usuario">+password: string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Usuario">+role: Roles</text>
+
+</g>
+</g>
+<g transform="translate(636, 204.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Usuario">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Usuario">
+<text x="0.0" y="13.5" stroke="none" data-name="Usuario">#getCodigo(): string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Usuario">#getName(): string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Usuario">#getEmail(): string</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Usuario">#getPassword(): string</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Usuario">#getRole(): Roles</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Usuario">#setCodigo(): void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Usuario">#setName(): void</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Usuario">#setEmail(): void</text>
+<text x="0.0" y="133.5" stroke="none" data-name="Usuario">#setPassword(): void</text>
+<text x="0.0" y="148.5" stroke="none" data-name="Usuario">#setRole(): void</text>
+<text x="0.0" y="163.5" stroke="none" data-name="Usuario">#toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Oficina">
+<g fill="#eee8d5" stroke="#33322E" data-name="Oficina">
+<rect x="870.0" y="142.5" height="183.0" width="206.0" data-name="Oficina"></rect>
+<path d="M870.0 173.5 L1076.0 173.5" fill="none" data-name="Oficina"></path>
+<path d="M870.0 234.5 L1076.0 234.5" fill="none" data-name="Oficina"></path>
+</g>
+<g transform="translate(870, 142.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Oficina">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Oficina">
+<a id="src/types/model.ts.Oficina" xlink:href="src/types/model.ts"><text x="95.0" y="13.5" stroke="none" text-anchor="middle" data-name="Oficina">Oficina</text></a>
+
+</g>
+</g>
+<g transform="translate(870, 173.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Oficina">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Oficina">
+<text x="0.0" y="13.5" stroke="none" data-name="Oficina">+id: number</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Oficina">+location: string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Oficina">+description: string</text>
+
+</g>
+</g>
+<g transform="translate(870, 234.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Oficina">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Oficina">
+<text x="0.0" y="13.5" stroke="none" data-name="Oficina">#getLocation(): string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Oficina">#getDescription(): string</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Oficina">#setLocation(): void</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Oficina">#setDescription(): void</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Oficina">#toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Unidad">
+<g fill="#eee8d5" stroke="#33322E" data-name="Unidad">
+<rect x="1116.0" y="82.5" height="303.0" width="224.0" data-name="Unidad"></rect>
+<path d="M1116.0 113.5 L1340.0 113.5" fill="none" data-name="Unidad"></path>
+<path d="M1116.0 204.5 L1340.0 204.5" fill="none" data-name="Unidad"></path>
+</g>
+<g transform="translate(1116, 82.5)" font-family="Helvetica" font-size="12pt" font-weight="bold" font-style="normal" data-name="Unidad">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Unidad">
+<a id="src/types/model.ts.Unidad" xlink:href="src/types/model.ts"><text x="104.0" y="13.5" stroke="none" text-anchor="middle" data-name="Unidad">Unidad</text></a>
+
+</g>
+</g>
+<g transform="translate(1116, 113.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Unidad">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Unidad">
+<text x="0.0" y="13.5" stroke="none" data-name="Unidad">+serialNumber: string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Unidad">+equipment: Equipo</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Unidad">+state: States</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Unidad">+office: Oficina</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Unidad">+owner: Usuario</text>
+
+</g>
+</g>
+<g transform="translate(1116, 204.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Unidad">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Unidad">
+<text x="0.0" y="13.5" stroke="none" data-name="Unidad">#getSerialNumber(): string</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Unidad">#getEquipment(): Equipo</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Unidad">#getState(): States</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Unidad">#getOffice(): Oficina</text>
+<text x="0.0" y="73.5" stroke="none" data-name="Unidad">#getOwner(): Usuario</text>
+<text x="0.0" y="88.5" stroke="none" data-name="Unidad">#setSerialNumber(): void</text>
+<text x="0.0" y="103.5" stroke="none" data-name="Unidad">#setEquipment(): void</text>
+<text x="0.0" y="118.5" stroke="none" data-name="Unidad">#setState(): void</text>
+<text x="0.0" y="133.5" stroke="none" data-name="Unidad">#setOffice(): void</text>
+<text x="0.0" y="148.5" stroke="none" data-name="Unidad">#setOwner(): void</text>
+<text x="0.0" y="163.5" stroke="none" data-name="Unidad">#toString(): string</text>
+
+</g>
+</g>
+</g>
+<g data-name="Roles">
+<g fill="lightgreen" stroke="#33322E" data-name="Roles">
+<rect x="1380.0" y="180.5" height="107.0" width="273.0" data-name="Roles"></rect>
+<path d="M1380.0 211.5 L1653.0 211.5" fill="none" data-name="Roles"></path>
+</g>
+<g transform="translate(1380, 180.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Roles">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="Roles">
+<a id="src/types/model.ts.Roles" xlink:href="src/types/model.ts"><text x="128.5" y="13.5" stroke="none" text-anchor="middle" data-name="Roles">Roles</text></a>
+
+</g>
+</g>
+<g transform="translate(1380, 211.5)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="Roles">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="Roles">
+<text x="0.0" y="13.5" stroke="none" data-name="Roles">ADMIN</text>
+<text x="0.0" y="28.5" stroke="none" data-name="Roles">OWNER</text>
+<text x="0.0" y="43.5" stroke="none" data-name="Roles">JEFE_MANTENIMIENTO</text>
+<text x="0.0" y="58.5" stroke="none" data-name="Roles">ENCARGADO_MANTENIMIENTO</text>
+
+</g>
+</g>
+</g>
+<g data-name="States">
+<g fill="lightgreen" stroke="#33322E" data-name="States">
+<rect x="1693.0" y="188.0" height="92.0" width="97.0" data-name="States"></rect>
+<path d="M1693.0 219.0 L1790.0 219.0" fill="none" data-name="States"></path>
+</g>
+<g transform="translate(1693, 188)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="States">
+<g transform="translate(8, 8)" fill="#33322E" text-align="center" data-name="States">
+<a id="src/types/model.ts.States" xlink:href="src/types/model.ts"><text x="40.5" y="13.5" stroke="none" text-anchor="middle" data-name="States">States</text></a>
+
+</g>
+</g>
+<g transform="translate(1693, 219)" font-family="Helvetica" font-size="12pt" font-weight="normal" font-style="normal" data-name="States">
+<g transform="translate(8, 8)" fill="#33322E" text-align="left" data-name="States">
+<text x="0.0" y="13.5" stroke="none" data-name="States">BUENO</text>
+<text x="0.0" y="28.5" stroke="none" data-name="States">MALO</text>
+<text x="0.0" y="43.5" stroke="none" data-name="States">REGULAR</text>
+
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

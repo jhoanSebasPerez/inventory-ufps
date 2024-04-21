@@ -1,14 +1,15 @@
+"use client";
+
 import {
   Table,
   TableBody,
-  TableCell,
   TableHead,
   TableHeader,
+  TableCell,
   TableRow,
 } from "@/components/ui/table";
 
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 
 import {
   Card,
@@ -19,13 +20,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Tabs, TabsContent } from "@/components/ui/tabs";
 
+import { Eye } from "lucide-react";
 import {
-  File,
-  ListFilter,
-  PlusCircle,
-} from "lucide-react";
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+
+import { File, ListFilter, PlusCircle } from "lucide-react";
 
 import {
   DropdownMenu,
@@ -36,50 +41,89 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
-import { TEquipment, statesColors } from "@/types/equipment";
-import ViewDetails from "@/components/ui/view-details";
+import { TEquipment } from "@/types/equipment";
+import { useRouter } from "next/navigation";
 
-import axios from "axios";
-import {productsEndpoint} from "@/lib/endpoints";
-import {BadgeProps} from "@/components/ui/badge"
+import { productsEndpoint, categoriesEndpoint } from "@/lib/endpoints";
+import useSWR from "swr";
+import { useState } from "react"
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { useDialogs } from "@/hooks/useDialogs";
+import { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "../ui/pagination";
 
+const fetcherEquipments = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => data);
 
-export async function EquipmentList() {
- 
- 
-  const { data } = await axios.get(productsEndpoint + "getAll");
-  const equipments: TEquipment[] = data.data;
+const fetcherCategories = (url: string) =>
+  fetch(url)
+    .then((res) => res.json())
+    .then((data) => data.data)
 
+export function EquipmentList() {
+  const take = 5;
+  const router = useRouter();
+  const { onOpen } = useDialogs();
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+  const [skip, setSkip] = useState<number>(1);
+
+  const handleCreateEquipment = () => {
+    router.push("/admin/equipments/new-equipment", { scroll: false });
+    onOpen();
+  }
+
+  const handleViewDetails = (id: Number) => {
+    router.push(`/admin/equipments/${id}`);
+  };
+
+  const {data} = useSWR(
+    `${productsEndpoint}?category=${selectedCategory}&take=${take}&skip=${skip}`,
+    fetcherEquipments,
+  );
+
+  const { data: categories } = useSWR(categoriesEndpoint, fetcherCategories);
+
+  if (data === undefined || categories === undefined) {
+    return (
+      <div className="flex align-center justify-center">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  const handleSelectCategory = (category: string) => {
+    setSkip(1);
+    if (category === selectedCategory) {
+      setSelectedCategory("all");
+    }
+    else {
+      setSelectedCategory(category);
+    }
+  }
 
   return (
     <Tabs defaultValue="all">
       <div className="flex items-center">
-        <TabsList>
-          <TabsTrigger value="all">Todos</TabsTrigger>
-          <TabsTrigger value="active">Portátiles</TabsTrigger>
-          <TabsTrigger value="draft">Impresoras</TabsTrigger>
-          <TabsTrigger value="archived" className="hidden sm:flex">
-            Computadores de escritorio
-          </TabsTrigger>
-        </TabsList>
         <div className="ml-auto flex items-center gap-2">
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" size="sm" className="h-8 gap-1">
                 <ListFilter className="h-3.5 w-3.5" />
                 <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-                  Filter
+                  Filtrar por:
                 </span>
               </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end">
-              <DropdownMenuLabel>Filter by</DropdownMenuLabel>
+              <DropdownMenuLabel>Categoria</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuCheckboxItem checked>
-                Active
-              </DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem>Draft</DropdownMenuCheckboxItem>
-              <DropdownMenuCheckboxItem>Archived</DropdownMenuCheckboxItem>
+              {categories && categories.length > 0 && categories.map((category, index) => (
+                <DropdownMenuCheckboxItem key={index} checked={category.name === selectedCategory}
+                  onClick={(e) => handleSelectCategory(category.name)}>
+                  {category.name}
+                </DropdownMenuCheckboxItem>
+              ))}
             </DropdownMenuContent>
           </DropdownMenu>
           <Button size="sm" variant="outline" className="h-8 gap-1">
@@ -88,10 +132,10 @@ export async function EquipmentList() {
               Export
             </span>
           </Button>
-          <Button size="sm" className="h-8 gap-1">
+          <Button size="sm" className="h-8 gap-1" onClick={handleCreateEquipment}>
             <PlusCircle className="h-3.5 w-3.5" />
             <span className="sr-only sm:not-sr-only sm:whitespace-nowrap">
-              Add Product
+              Agregar equipo
             </span>
           </Button>
         </div>
@@ -108,58 +152,88 @@ export async function EquipmentList() {
             <Table>
               <TableHeader>
                 <TableRow>
-                  <TableHead>Descripción</TableHead>
+                  <TableHead>Nombre</TableHead>
                   <TableHead>Marca</TableHead>
                   <TableHead className="hidden md:table-cell">Modelo</TableHead>
-                  <TableHead className="hidden md:table-cell">Estado</TableHead>
                   <TableHead className="hidden md:table-cell">
-                    Oficina
+                    Categoria
                   </TableHead>
-                  <TableHead className="hidden md:table-cell">Categoria</TableHead>
-                  <TableHead className="hidden md:table-cell">Cantidad</TableHead>
+                  <TableHead className="hidden md:table-cell">
+                    Cantidad
+                  </TableHead>
                   <TableHead>Detalles</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
-                  {equipments.length > 0 && equipments.map((equipment) => {
-                  const variant = statesColors[equipment.state] as BadgeProps["variant"];
-                  return (
-                    <TableRow key={equipment.id}>
+                {data.equipments &&
+                  data.equipments.length > 0 &&
+                  data.equipments.map((equipment: TEquipment) => {
+                    return (
+                      <TableRow key={equipment.id}>
+                        <TableCell className="font-medium">
+                          {equipment.name}
+                        </TableCell>
 
-                      <TableCell className="font-medium">
-                        {equipment.description}
-                      </TableCell>
+                        <TableCell>{equipment.brand}</TableCell>
 
-                      <TableCell>{equipment.brand}</TableCell>
+                        <TableCell>{equipment.model}</TableCell>
 
-                      <TableCell>{equipment.model}</TableCell>
-                      
-                      
-                      <TableCell>
-                        <Badge variant={variant}>
-                          {equipment.state}
-                        </Badge>
-                      </TableCell>
+                        <TableCell>{equipment.category}</TableCell>
 
-                      <TableCell>{equipment.office}</TableCell>
+                        <TableCell>{equipment.quantity}</TableCell>
 
-                      <TableCell>{equipment.category}</TableCell>
-
-                      <TableCell>{equipment.quantity}</TableCell>
-                      
-                      <ViewDetails id={equipment.id} />
-                    </TableRow>
-                   )})}
+                        <TableCell>
+                          <TooltipProvider>
+                            <Tooltip>
+                              <TooltipTrigger
+                                aria-label="Mostrar información"
+                                onClick={() => handleViewDetails(equipment.id)}
+                              >
+                                <Eye />
+                              </TooltipTrigger>
+                              <TooltipContent>
+                                <p>Mostrar información</p>
+                              </TooltipContent>
+                            </Tooltip>
+                          </TooltipProvider>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
               </TableBody>
             </Table>
-          </CardContent> 
-          <CardFooter>
+          </CardContent>
+          <CardFooter className="flex-col">
             <div className="text-xs text-muted-foreground">
-              Showing <strong>1-10</strong> of <strong>32</strong> products
+              mostrando <strong>{(skip - 1) * take + 1} - {data.count > (skip * take) ? (skip * take) : data.count}</strong> de <strong>{data.count}</strong> equipos
             </div>
-          </CardFooter>
-        </Card>
-      </TabsContent>
-    </Tabs>
+            <div className="flex items-center justify-center mt-12">
+              <Pagination>
+              <PaginationContent>
+                <PaginationItem>
+                  <PaginationPrevious 
+                      className={skip === 1 ? "cursor-not-allowed pointer-events-none opacity-30" : ""}
+                      onClick={(e) => ( skip === 1 ? () => {} : setSkip(skip > 1 ? (skip - 1) : 1))}/>
+                </PaginationItem>
+                  {
+                    Array.from({ length: Math.ceil(data.count / take)}).map((_, index) => (
+                      <PaginationItem  key={index} onClick={(e) => setSkip(index + 1)}>
+                        <PaginationLink isActive={skip === (index + 1)}>
+                          {index + 1}</PaginationLink>
+                      </PaginationItem>
+                    ))
+                  }
+                <PaginationItem>
+                  <PaginationNext 
+                      className={skip === Math.ceil(data.count / take) ? "cursor-not-allowed pointer-events-none opacity-30" : ""}
+                      onClick={(e) => (skip === Math.ceil(data.count / take) ? () => {} : setSkip(skip + 1))}/>
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>
+          </div>
+        </CardFooter>
+      </Card>
+    </TabsContent>
+    </Tabs >
   );
 }
